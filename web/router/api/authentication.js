@@ -1,5 +1,5 @@
 const mysql = require('mysql');
-var connection = mysql.connection({
+var connection = mysql.createConnection({
     host : 'nodjs-base.cluster-cjskwdik5gvo.ap-south-1.rds.amazonaws.com',
     user : 'admin',
     password : 'c7508TAN!',
