@@ -7,9 +7,9 @@ const connection = mysql.createConnection({
     database : 'insta_clone'
 })
 const isEmailValid = (email) => {
-    connection.query('SELECT COUNT(*) FROM users WHERE email=?',[email],(err,results) => {
+    connection.query('SELECT COUNT(*) AS TEMAIL FROM users WHERE email=?',[email],(err,results) => {
         if (err) console.log("Error in Email Validation");
-        console.log(results)
+        console.log(results.TEMAIL)
         return results ? false : true
     })
 }
