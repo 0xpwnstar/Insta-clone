@@ -5,7 +5,6 @@ var connection = mysql.createConnection({
     password : 'c7508TAN!',
     database : 'insta_clone'
 })
-connection.connect();
 var query = () => {
     let answer = 0;
     connection.query('SELECT * from users',(err,results) => {
@@ -13,7 +12,6 @@ var query = () => {
         console.log(results)
         answer = results
     })
-    connection.end();
     return answer
 }
 
