@@ -5,9 +5,8 @@ var connection = mysql.createConnection({
     password : 'c7508TAN!',
     database : 'insta_clone'
 })
-
-const query = () => {
-    connection.connect();
+connection.connect();
+var query = () => {
     let answer = 0;
     connection.query('SELECT * from users',(err,results) => {
         if (err) console.log(err);
@@ -19,8 +18,8 @@ const query = () => {
 }
 
 const user = (req,res) => {
-    
-    res.send(query())
+    query()
+    res.send("query()")
 }
 
 module.exports = user;
