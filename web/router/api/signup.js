@@ -27,7 +27,7 @@ exports.jsonParser = bodyParser.json()
 
 exports.signup = (req,res) => {
     body = req.body
-    isEmailValid(body.email) ? register(body.firstname, body.lastname, body.password, body.salt, body.email) : false;
+    !isEmailValid(body.email) ? register(body.firstname, body.lastname, body.password, body.salt, body.email) : false;
     res.send("Registered")
 }
 
