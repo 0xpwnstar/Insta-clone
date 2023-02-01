@@ -6,11 +6,11 @@ const connection = mysql.createConnection({
     password : 'c7508TAN!',
     database : 'insta_clone'
 })
-const isEmailValid = (email) => {
+const isEmailExist = (email) => {
     connection.query('SELECT COUNT(*) AS TEMAIL FROM users WHERE email=?',[email],(err,results) => {
         if (err) console.log("Error in Email Validation");
         console.log(results[0].TEMAIL)
-        return results[0].TEMAIL ? false : true
+        return results[0].TEMAIL == 0? true : false
     })
 }
 
@@ -27,7 +27,7 @@ exports.jsonParser = bodyParser.json()
 
 exports.signup = (req,res) => {
     body = req.body
-    !isEmailValid(body.email) ? register(body.firstname, body.lastname, body.password, body.salt, body.email) : false;
+    isEmailExist(body.email) == true ? register(body.firstname, body.lastname, body.password, body.salt, body.email) : false;
     res.send("Registered")
 }
 
