@@ -9,8 +9,8 @@ const connection = mysql.createConnection({
 const isEmailValid = (email) => {
     connection.query('SELECT COUNT(*) AS TEMAIL FROM users WHERE email=?',[email],(err,results) => {
         if (err) console.log("Error in Email Validation");
-        console.log(results.TEMAIL)
-        return results ? false : true
+        console.log(results[0].TEMAIL)
+        return results[0].TEMAIL ? false : true
     })
 }
 
