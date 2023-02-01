@@ -15,8 +15,7 @@ const isEmailValid = (email) => {
 }
 
 const register = (firstname, lastname, password, salt, email) => {
-    connection.query('Insert into users (firstname,lastname,password,salt,email) values 
-    (?,?,?,?,?),[firstname,lastname, password, salt, email],(err,results) => {
+    connection.query('Insert into users (firstname,lastname,password,salt,email) values (?,?,?,?,?)',[firstname,lastname, password, salt, email],(err,results) => {
         if (err) console.log("Error in user registeration");
         console.log(results)
     })
