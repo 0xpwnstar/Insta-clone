@@ -9,14 +9,16 @@ const connection = mysql.createConnection({
 const isEmailValid = (email) => {
     connection.query('SELECT COUNT(*) FROM users WHERE email=?',[email],(err,results) => {
         if (err) console.log("Error in Email Validation");
+        console.log(results)
         return results ? false : true
     })
 }
 
 const register = (firstname, lastname, password, salt, email) => {
-    connection.query(`Insert into users (firstname,lastname,password,salt,email) values 
-    (${firstname},${lastname},${password},${salt},${email})`,(err,results) => {
+    connection.query('Insert into users (firstname,lastname,password,salt,email) values 
+    (?,?,?,?,?),[firstname,lastname, password, salt, email],(err,results) => {
         if (err) console.log("Error in user registeration");
+        console.log(results)
     })
 }
 
