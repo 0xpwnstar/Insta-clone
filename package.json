@@ -1,0 +1,15 @@
+{
+  "name": "insta",
+  "version": "1.0.0",
+  "description": "Instagram clone's authorization developed using microservies architecture, with REST API, MYSQL database, node and express. This is deployed by docker containers on aws EC2 instance.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chaitanya Bhojane",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "npm": "^9.4.0"
+  }
+}
