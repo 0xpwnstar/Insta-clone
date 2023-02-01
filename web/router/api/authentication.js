@@ -8,11 +8,14 @@ var connection = mysql.createConnection({
 
 const query = () => {
     connection.connect();
+    let answer = 0;
     connection.query('SELECT * from users',(err,results) => {
         if (err) console.log(err);
         console.log(results)
-        return results
+        answer = results
     })
+    connection.end();
+    return answer
 }
 
 const user = (req,res) => {
