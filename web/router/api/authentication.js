@@ -16,8 +16,8 @@ const query = () => {
 }
 
 const user = (req,res) => {
-    query()
-    res.send("query()")
+    answer = query()
+    res.send({message: answer})
 }
 
 module.exports = user;
