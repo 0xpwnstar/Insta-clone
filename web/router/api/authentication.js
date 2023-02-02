@@ -9,7 +9,7 @@ const query = () => {
     let answer = 0;
     connection.query('SELECT * from users',(err,results) => {
         if (err) console.log(err);
-        return results
+        return results[0]
     })
     return answer
 }
