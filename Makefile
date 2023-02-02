@@ -9,3 +9,6 @@ down:
 
 logs:
 	docker compose logs
+
+down-v:
+	docker compose down -v
