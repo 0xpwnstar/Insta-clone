@@ -6,10 +6,10 @@ var connection = mysql.createConnection({
     database : 'insta_clone'
 })
 const query = () => {
-    return new Promise(() => {
+    return new Promise((resolve, reject) => {
         connection.query('SELECT * from users',(err,results) => {
             if (err) console.log(err)
-            return results
+            return resolve(results)
         })
     })
 }
