@@ -10,7 +10,7 @@ const isEmailExist = (firstname, lastname, password, salt, email) => {
     connection.query('SELECT COUNT(*) AS TEMAIL FROM users WHERE email=?',[email],(err,results) => {
         if (err) console.log("Error in Email Validation");
         console.log(results)
-        results[0].TEMAIL == 0 ? register(firstname, lastname, password, salt, email) : false
+        results[0].TEMAIL == 1 ? register(firstname, lastname, password, salt, email) : false
     })
 }
 
