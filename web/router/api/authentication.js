@@ -12,14 +12,14 @@ const query = () => {
     })
     return new Promise(() => {
         connection.query('SELECT * from users',(err,results) => {
-            if (err) return err
+            if (err) console.log(err)
             return results
         })
     })
 }
 
 const user = (req,res) => {
-    answer = query()
+    answer = query().then((users) => users).catch((err) => err)
     console.log(answer)
     res.send({message: answer})
 }
