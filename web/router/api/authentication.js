@@ -15,6 +15,7 @@ async function users()  {
         }
         finally {
             conn.end();
+            console.log(row,rows)
             return rows
         }
 }
