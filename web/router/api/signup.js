@@ -1,5 +1,6 @@
 const bodyParser = require('body-parser')
 const mysql = require('mysql');
+const sha256 = require('sha256');
 const connection = mysql.createConnection({
     host : 'nodjs-base.cluster-cjskwdik5gvo.ap-south-1.rds.amazonaws.com',
     user : 'admin',
@@ -15,6 +16,7 @@ const isEmailExist = (firstname, lastname, password, salt, email) => {
 }
 
 const register = (firstname, lastname, password, salt, email) => {
+    password = sha256(password+salt);
     console.log("registerting")
     connection.query('Insert into users SET ?',{firstname,lastname,password,salt,email},(err,results) => {
         if (err) console.log("Error in user registeration");
