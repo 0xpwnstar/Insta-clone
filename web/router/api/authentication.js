@@ -1,29 +1,30 @@
 const mysql = require('mysql');
-const util = require('util');
-const config = {
+const conn = mysql.createConnection({
     host : 'nodjs-base.cluster-cjskwdik5gvo.ap-south-1.rds.amazonaws.com',
     user : 'admin',
     password : 'c7508TAN!',
     database : 'insta_clone'
-}
-const conn = mysql.createConnection(config)
-const query = util.promisify(conn.query).bind(conn)
-async function users()  {
-    var rows = []
-    try {
-        rows = await query('SELECT * from users')
+})
+
+users = () =>  {
+return new Promise((resolve, reject) => {
+    conn.query('Select * from users',(err, res) => {
+        if (err) {
+            return reject(err)
         }
-        finally {
-            conn.end();
-            console.log(rows)
-            return rows
-        }
+        return resolve(res)
+    })
+} ) 
 }
 
-const user = (req,res) => {
-    answer = users().then(value => value)
-    console.log(answer)
-    res.send({message: answer})
+const user = async (req,res) => {
+    try {
+        const ans = await users();
+        res.status(200).json({elements: ans});
+    } catch (error) {
+        console.log(error)
+        res.send("err")
+    }
 }
 
 module.exports = user;
