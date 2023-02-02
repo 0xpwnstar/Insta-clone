@@ -4,7 +4,7 @@ services:
   insta:
     build:
       context: .
-      dockerfile: DOCKERFILE
+      dockerfile: Dockerfile
     container_name: insta
     ports:
       - "3000:3000"
