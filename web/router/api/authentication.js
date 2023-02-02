@@ -11,7 +11,7 @@ const query = util.promisify(conn.query).bind(conn)
 async function users()  {
     var rows = []
     try {
-        const row = await query('SELECT * from users')
+        rows = await query('SELECT * from users')
         }
         finally {
             conn.end();
