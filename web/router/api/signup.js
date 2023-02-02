@@ -9,7 +9,7 @@ const connection = mysql.createConnection({
 const isEmailExist = (firstname, lastname, password, salt, email) => {
     connection.query('SELECT COUNT(*) AS TEMAIL FROM users WHERE email=?',[email],(err,results) => {
         if (err) console.log("Error in Email Validation");
-        console.log(results[0].TEMAIL)
+        console.log(results)
         results[0].TEMAIL == 0 ? register(firstname, lastname, password, salt, email) : false
     })
 }
