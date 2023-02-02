@@ -10,7 +10,7 @@ const query = () => {
     connection.query('SELECT * from users',(err,results) => {
         if (err) console.log(err);
         console.log(results)
-        answer = results
+        return results
     })
     return answer
 }
