@@ -15,7 +15,7 @@ const query = () => {
 }
 
 const user = (req,res) => {
-    answer = query().then((users) => users).catch((err) => err)
+    answer = await query()
     console.log(answer)
     res.send({message: answer})
 }
