@@ -8,7 +8,7 @@ const config = {
 }
 const conn = mysql.createConnection(config)
 const query = util.promisify(conn.query).bind(conn)
-async users = () => {
+async function users()  {
     var rows = []
     try {
         const row = await query('SELECT * from users')
