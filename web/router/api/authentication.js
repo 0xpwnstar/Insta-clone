@@ -20,6 +20,7 @@ const query = () => {
 
 const user = (req,res) => {
     answer = query()
+    console.log(answer)
     res.send({message: answer})
 }
 
