@@ -9,7 +9,6 @@ const query = () => {
     let answer = 0;
     connection.query('SELECT * from users',(err,results) => {
         if (err) console.log(err);
-        console.log(results)
         return results
     })
     return answer
