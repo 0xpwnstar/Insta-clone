@@ -2,12 +2,11 @@ name: Insta-Auth CI-CD
 
 on:
 
-for the main branch
 
   push:
-  branches: [main]
+    branches: [main]
   pull_request:
-  branches: [main]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
