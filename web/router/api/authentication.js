@@ -20,7 +20,7 @@ async function users()  {
 }
 
 const user = (req,res) => {
-    answer = users(),then(value => value)
+    answer = users().then(value => value)
     console.log(answer)
     res.send({message: answer})
 }
