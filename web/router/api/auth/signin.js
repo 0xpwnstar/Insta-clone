@@ -34,7 +34,7 @@ const signInIfEmailExists = (email, password) => {
     connection.query('SELECT COUNT(*) AS TEMAIL FROM users WHERE email=?',[email],(err,results) => {
         if (err) console.log("Error in Email Validation");
         console.log(results)
-        results[0].TEMAIL == 1 ? true : false
+        return results[0].TEMAIL == 1 ? true : false
     })
 }
 
