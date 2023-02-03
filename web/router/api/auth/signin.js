@@ -8,7 +8,7 @@ const connection = mysql.createConnection({
 })
 
 salt = (email) => {
-    return Promise((resolve,reject) => {
+    return new Promise((resolve,reject) => {
         connection.query('SELECT salt FROM users WHERE email=?',[email],(err,results) => {
             if (err) {
                 return reject(err)
@@ -19,7 +19,7 @@ salt = (email) => {
 }
 
 hashedPassword = (email) => {
-    return Promise((resolve,reject) => {
+    return new Promise((resolve,reject) => {
         connection.query('SELECT password FROM users WHERE email=?',[email],(err,results) => {
             if (err) {
                 return reject(err)
@@ -43,7 +43,6 @@ exports.signin = async (req,res) => {
     })) {
         const salt_ = 0;
         const hashedPassword_ = 0;
-        console.log("here")
         try {
             salt_ = await salt(body.email)
             console.log(salt); 
