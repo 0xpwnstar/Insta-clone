@@ -7,7 +7,7 @@ const connection = mysql.createConnection({
     database : 'insta_clone'
 })
 
-salt = () => {
+salt = (email) => {
     return Promise((resolve,reject) => {
         connection.query('SELECT salt FROM users WHERE email=?',[email],(err,results) => {
             if (err) {
@@ -18,7 +18,7 @@ salt = () => {
     })
 }
 
-hashedPassword = () => {
+hashedPassword = (email) => {
     return Promise((resolve,reject) => {
         connection.query('SELECT password FROM users WHERE email=?',[email],(err,results) => {
             if (err) {
@@ -38,24 +38,24 @@ hashedPassword = () => {
 
 exports.signin = async (req,res) => {
     body = req.body
-    if (connection.query('SELECT COUNT(*) AS TEMAIL FROM users WHERE email=?',[email],(err,results) => {
+    if (connection.query('SELECT COUNT(*) AS TEMAIL FROM users WHERE email=?',[body.email],(err,results) => {
         if (err) {return 0} return 1
     })) {
         const salt_ = 0;
         const hashedPassword_ = 0;
         console.log("here")
         try {
-            salt_ = await salt()
+            salt_ = await salt(body.email)
             console.log(salt); 
         } catch (error) {
             console.log(error)
         }
         try {
-            hashedPassword_ = await hashedPassword() 
+            hashedPassword_ = await hashedPassword(body.email) 
         } catch (error) {
             console.log(error)
         }
-        password = crypto.createHmac('sha256',salt).update(password).digest('hex');
+        password = crypto.createHmac('sha256',salt).update(body.password).digest('hex');
         if (password == hashedPassword_) return res.send("Login")
         };
     res.send("Failed");
