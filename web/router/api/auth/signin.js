@@ -34,7 +34,7 @@ const signInIfEmailExists = (email, password) => {
     connection.query('SELECT COUNT(*) AS TEMAIL FROM users WHERE email=?',[email],(err,results) => {
         if (err) console.log("Error in Email Validation");
         console.log(results)
-        results[0].TEMAIL == 1 ? signIn(email, password) : false
+        results[0].TEMAIL == 1 ? true : false
     })
 }
 
@@ -58,8 +58,23 @@ const signIn = async (email, password) => {
 
 
 
-exports.signin = (req,res) => {
+exports.signin = async (req,res) => {
     body = req.body
-    if (signInIfEmailExists(body.email,body.password)) res.send("Login");
+    if (signInIfEmailExists(body.email,body.password)) {
+        const salt_ = 0;
+        const hashedPassword_ = 0;
+        try {
+            salt_ = await salt() 
+        } catch (error) {
+            console.log(error)
+        }
+        try {
+            hashedPassword_ = await hashedPassword() 
+        } catch (error) {
+            console.log(error)
+        }
+        password = crypto.createHmac('sha256',salt).update(password).digest('hex');
+        if (password == hashedPassword_) return res.send("Login")
+        };
     res.send("Failed");
 }
