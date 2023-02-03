@@ -7,7 +7,7 @@ const connection = mysql.createConnection({
     password : 'c7508TAN!',
     database : 'insta_clone'
 })
-const isEmailExist = (firstname, lastname, password,  email) => {
+const registerIfEmailExists = (firstname, lastname, password,  email) => {
     connection.query('SELECT COUNT(*) AS TEMAIL FROM users WHERE email=?',[email],(err,results) => {
         if (err) console.log("Error in Email Validation");
         console.log(results)
@@ -30,7 +30,7 @@ exports.jsonParser = bodyParser.json()
 
 exports.signup = (req,res) => {
     body = req.body
-    isEmailExist(body.firstname,body.lastname,body.password, body.email)
+    registerIfEmailExists(body.firstname,body.lastname,body.password, body.email)
     res.send("Registered")
 }
 

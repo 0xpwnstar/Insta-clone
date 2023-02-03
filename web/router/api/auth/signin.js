@@ -6,23 +6,62 @@ const connection = mysql.createConnection({
     password : 'c7508TAN!',
     database : 'insta_clone'
 })
-const isEmailExist = (email, password) => {
-    connection.query('SELECT COUNT(*) AS TEMAIL FROM users WHERE email=?',[email],(err,results) => {
-        if (err) console.log("Error in Email Validation");
-        console.log(results)
-        results[0].TEMAIL == 1 ? signin(email, password) : false
+
+salt = () => {
+    return Promise((resolve,reject) => {
+        connection.query('SELECT salt FROM users WHERE email=?',[email],(err,results) => {
+            if (err) {
+                return reject(err)
+            } else {
+                resolve(results)
+            }
+        }
     })
 }
 
-const signin = (email, password) => {
-    salt = connection.query('SELECT salt FROM users WHERE email=?',[email],(err,results) => { if (err) {console.log(err)} else {return results[0]}})
-    console.log(salt)
+hashedPassword = () => {
+    return Promise((resolve,reject) => {
+        connection.query('SELECT password FROM users WHERE email=?',[email],(err,results) => {
+            if (err) {
+                return reject(err)
+            } else {
+                resolve(results)
+            }
+        }
+    })
+}
+
+
+const signInIfEmailExists = (email, password) => {
+    connection.query('SELECT COUNT(*) AS TEMAIL FROM users WHERE email=?',[email],(err,results) => {
+        if (err) console.log("Error in Email Validation");
+        console.log(results)
+        results[0].TEMAIL == 1 ? signIn(email, password) : false
+    })
+}
+
+const signIn = async (email, password) => {
+    const salt_ = 0;
+    const hashedPassword_ = 0;
+    try {
+        salt_ = await salt() 
+    } catch (error) {
+        console.log(error)
+    }
+    try {
+        hashedPassword_ = await hashedPassword() 
+    } catch (error) {
+        console.log(error)
+    }
+    password = crypto.createHmac('sha256',salt).update(password).digest('hex');
+    if (password == hashedPassword_) return true
+
 }
 
 
 
 exports.signin = (req,res) => {
     body = req.body
-    isEmailExist(body.email,body.password)
-    res.send("Login")
+    if (signInIfEmailExists(body.email,body.password)) res.send("Login");
+    res.send("Failed");
 }
