@@ -55,7 +55,7 @@ exports.signin = async (req,res) => {
             console.log(error)
         }
         password = crypto.createHmac('sha256',s[0].salt).update(body.password).digest('hex');
-        if (password == h[0]) return res.send("Login")
+        if (password == h[0].password) return res.send("Login")
         };
     res.send("Failed");
 }
