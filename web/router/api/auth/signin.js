@@ -12,9 +12,8 @@ salt = () => {
         connection.query('SELECT salt FROM users WHERE email=?',[email],(err,results) => {
             if (err) {
                 return reject(err)
-            } else {
-                resolve(results)
             }
+            resolve(results)
         })
     })
 }
@@ -24,9 +23,8 @@ hashedPassword = () => {
         connection.query('SELECT password FROM users WHERE email=?',[email],(err,results) => {
             if (err) {
                 return reject(err)
-            } else {
-                resolve(results)
             }
+            resolve(results)
         })
     })
 }
