@@ -1,5 +1,5 @@
 const users = require('./authentication');
-const { jsonParser, signup } = require('./api/signup');
+const { jsonParser, signup } = require('./signup');
 const express = require('express')
 const router = express.Router();
 
