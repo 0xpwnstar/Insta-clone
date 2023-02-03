@@ -15,7 +15,7 @@ salt = () => {
             } else {
                 resolve(results)
             }
-        }
+        })
     })
 }
 
@@ -27,7 +27,7 @@ hashedPassword = () => {
             } else {
                 resolve(results)
             }
-        }
+        })
     })
 }
 
