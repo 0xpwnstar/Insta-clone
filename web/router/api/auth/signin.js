@@ -45,7 +45,7 @@ exports.signin = async (req,res) => {
         let hashedPassword_ = 0;
         try {
             s = await salt(body.email)
-            console.log(s[0]); 
+            console.log(s[0].salt); 
         } catch (error) {
             console.log(error)
         }
@@ -54,7 +54,7 @@ exports.signin = async (req,res) => {
         } catch (error) {
             console.log(error)
         }
-        password = crypto.createHmac('sha256',salt_[0]).update(body.password).digest('hex');
+        password = crypto.createHmac('sha256',s[0].salt).update(body.password).digest('hex');
         if (password == h[0]) return res.send("Login")
         };
     res.send("Failed");
