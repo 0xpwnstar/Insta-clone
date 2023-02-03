@@ -15,7 +15,7 @@ const isEmailExist = (email, password) => {
 }
 
 const signin = (email, password) => {
-    salt = connection.query('SELECT salt FROM users WHERE email=?',[email],(err,results) => { if (err) console.log(err) else {console.log(results);return results[0]}})
+    salt = connection.query('SELECT salt FROM users WHERE email=?',[email],(err,results) => { if (err) {console.log(err)} else {console.log(results);return results[0]}})
     password = crypto.createHmac('sha256',salt).update(password).digest('hex');
     console.log(password)
 }
