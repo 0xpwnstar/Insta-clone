@@ -41,21 +41,21 @@ exports.signin = async (req,res) => {
     if (connection.query('SELECT COUNT(*) AS TEMAIL FROM users WHERE email=?',[body.email],(err,results) => {
         if (err) {return 0} return 1
     })) {
-        let salt_ = 0;
+        let s = 0;
         let hashedPassword_ = 0;
         try {
-            salt_ = await salt(body.email)
-            console.log(salt_); 
+            s = await salt(body.email)
+            console.log(s[0]); 
         } catch (error) {
             console.log(error)
         }
         try {
-            hashedPassword_ = await hashedPassword(body.email) 
+            h = await hashedPassword(body.email) 
         } catch (error) {
             console.log(error)
         }
-        password = crypto.createHmac('sha256',salt_[0].salt).update(body.password).digest('hex');
-        if (password == hashedPassword_) return res.send("Login")
+        password = crypto.createHmac('sha256',salt_[0]).update(body.password).digest('hex');
+        if (password == h[0]) return res.send("Login")
         };
     res.send("Failed");
 }
