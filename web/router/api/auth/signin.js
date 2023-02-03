@@ -31,10 +31,13 @@ hashedPassword = () => {
 
 
 const signInIfEmailExists = (email, password) => {
-    connection.query('SELECT COUNT(*) AS TEMAIL FROM users WHERE email=?',[email],(err,results) => {
-        if (err) console.log("Error in Email Validation");
-        console.log(results[0].TEMAIL)
-        return results[0].TEMAIL == 1 ? true : false
+    return Promise((resolve,reject) => {
+        connection.query('SELECT COUNT(*) AS TEMAIL FROM users WHERE email=?',[email],(err,results) => {
+            if (err) {
+                return reject(err)
+            }
+            resolve(results)
+        })
     })
 }
 
@@ -43,8 +46,7 @@ const signInIfEmailExists = (email, password) => {
 
 exports.signin = async (req,res) => {
     body = req.body
-    console.log(signInIfEmailExists(body.email,body.password))
-    if (signInIfEmailExists(body.email,body.password)) {
+    if (await signInIfEmailExists(body.email,body.password)) {
         const salt_ = 0;
         const hashedPassword_ = 0;
         console.log("here")
