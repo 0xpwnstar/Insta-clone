@@ -43,6 +43,7 @@ const signInIfEmailExists = (email, password) => {
 
 exports.signin = async (req,res) => {
     body = req.body
+    console.log(signInIfEmailExists(body.email,body.password))
     if (signInIfEmailExists(body.email,body.password)) {
         const salt_ = 0;
         const hashedPassword_ = 0;
