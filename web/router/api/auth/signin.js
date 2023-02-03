@@ -38,23 +38,6 @@ const signInIfEmailExists = (email, password) => {
     })
 }
 
-const signIn = async (email, password) => {
-    const salt_ = 0;
-    const hashedPassword_ = 0;
-    try {
-        salt_ = await salt() 
-    } catch (error) {
-        console.log(error)
-    }
-    try {
-        hashedPassword_ = await hashedPassword() 
-    } catch (error) {
-        console.log(error)
-    }
-    password = crypto.createHmac('sha256',salt).update(password).digest('hex');
-    if (password == hashedPassword_) return true
-
-}
 
 
 
@@ -63,8 +46,10 @@ exports.signin = async (req,res) => {
     if (signInIfEmailExists(body.email,body.password)) {
         const salt_ = 0;
         const hashedPassword_ = 0;
+        console.log("here")
         try {
-            salt_ = await salt() 
+            salt_ = await salt()
+            console.log(salt); 
         } catch (error) {
             console.log(error)
         }
