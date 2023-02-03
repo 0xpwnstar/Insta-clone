@@ -41,8 +41,8 @@ exports.signin = async (req,res) => {
     if (connection.query('SELECT COUNT(*) AS TEMAIL FROM users WHERE email=?',[body.email],(err,results) => {
         if (err) {return 0} return 1
     })) {
-        const salt_ = 0;
-        const hashedPassword_ = 0;
+        let salt_ = 0;
+        let hashedPassword_ = 0;
         try {
             salt_ = await salt(body.email)
             console.log(salt); 
