@@ -9,7 +9,7 @@ var corsOptions = {
 
 const app =  express()
 app.use(cors(corsOptions));
-app.use(bodyParser.json)
+app.use(bodyParser.json())
 app.use("/",apiRouter)
 app.get("/",(req,res) => {
     res.send("We are going to mars!")
