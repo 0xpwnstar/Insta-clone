@@ -1,5 +1,6 @@
 const mysql = require('mysql');
-const crypto = require('crypto')
+const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
 const connection = mysql.createConnection({
     host : 'nodjs-base.cluster-cjskwdik5gvo.ap-south-1.rds.amazonaws.com',
     user : 'admin',
@@ -55,7 +56,9 @@ exports.signin = async (req,res) => {
             console.log(error)
         }
         password = crypto.createHmac('sha256',s[0].salt).update(body.password).digest('hex');
-        if (password == h[0].password) return res.send("Login")
+        if (password == h[0].password) {
+            var token = jwt.sign("chaitu")
+            return res.send(token)}
         };
     res.send("Failed");
 }
