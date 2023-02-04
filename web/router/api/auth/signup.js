@@ -1,4 +1,3 @@
-const bodyParser = require('body-parser')
 const mysql = require('mysql');
 const crypto = require('crypto')
 const connection = mysql.createConnection({
@@ -26,7 +25,6 @@ const register = (firstname, lastname, password, email) => {
 }
 
 
-exports.jsonParser = bodyParser.json()
 
 exports.signup = (req,res) => {
     body = req.body

@@ -29,18 +29,18 @@ hashedPassword = (email) => {
     })
 }
 
-
-
-
-
-
+userExists = (email) => {
+    return new Promise((resolve,reject) => {
+        connection.query('SELECT COUNT(*) AS TEMAIL FROM users WHERE email=?',[body.email],(err,results) => {
+            if (err) {return reject(0)} return resolve(1)
+    })
+    })
+}
 
 
 exports.signin = async (req,res) => {
     body = req.body
-    if (connection.query('SELECT COUNT(*) AS TEMAIL FROM users WHERE email=?',[body.email],(err,results) => {
-        if (err) {return 0} return 1
-    })) {
+    if (userExists(body.email)) {
         let s = 0;
         let hashedPassword_ = 0;
         try {
