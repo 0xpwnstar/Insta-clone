@@ -40,8 +40,8 @@ userExists = (email) => {
 
 userId = (email) => {
     return new Promise((resolve,reject) => {
-        connection.query('SELECT uid as uid FROM users WHERE email=?',[body.email],(err,results) => {
-            if (err) {return reject(0)} return resolve(uid)
+        connection.query('SELECT uid FROM users WHERE email=?',[body.email],(err,results) => {
+            if (err) {return reject(0)} return resolve(results[0].uid)
     })
     })
 }
