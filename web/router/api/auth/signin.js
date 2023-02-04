@@ -38,6 +38,14 @@ userExists = (email) => {
     })
 }
 
+userId = (email) => {
+    return new Promise((resolve,reject) => {
+        connection.query('SELECT uid FROM users WHERE email=?',[body.email],(err,results) => {
+            if (err) {return reject(0)} return resolve(uid)
+    })
+    })
+}
+
 
 exports.signin = async (req,res) => {
     body = req.body
@@ -57,7 +65,8 @@ exports.signin = async (req,res) => {
         }
         password = crypto.createHmac('sha256',s[0].salt).update(body.password).digest('hex');
         if (password == h[0].password) {
-            var token = jwt.sign("chaitu","lavda")
+            const uid = await userId(body.email);
+            var token = jwt.sign(uid,"lavda")
             return res.send(token)}
         };
     res.send("Failed");
