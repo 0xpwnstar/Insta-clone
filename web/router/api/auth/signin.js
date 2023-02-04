@@ -57,7 +57,7 @@ exports.signin = async (req,res) => {
         }
         password = crypto.createHmac('sha256',s[0].salt).update(body.password).digest('hex');
         if (password == h[0].password) {
-            var token = jwt.sign("chaitu")
+            var token = jwt.sign("chaitu","lavda")
             return res.send(token)}
         };
     res.send("Failed");
