@@ -1,4 +1,4 @@
-import { JSONRPCClient } from "json-rpc-2.0";
+const JSONRPCClient = require("json-rpc-2.0");
 
 // JSONRPCClient needs to know how to send a JSON-RPC request.
 // Tell it by passing a function to its constructor. The function must take a JSON-RPC request and send it.
