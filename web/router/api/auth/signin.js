@@ -67,7 +67,7 @@ exports.signin = async (req,res) => {
         if (password == h[0].password) {
             const uid = await userId(body.email);
             var token = jwt.sign(uid,"lavda")
-            return res.send(token)}
+            return res.send({token})}
         };
     res.send("Failed");
 }
