@@ -1,4 +1,4 @@
-const JSONRPCClient = require("json-rpc-2.0");
+const {JSONRPCClient} = require("json-rpc-2.0")
 
 // JSONRPCClient needs to know how to send a JSON-RPC request.
 // Tell it by passing a function to its constructor. The function must take a JSON-RPC request and send it.
@@ -21,13 +21,5 @@ const client = new JSONRPCClient((jsonRPCRequest) =>
   })
 );
 
-// Use client.request to make a JSON-RPC request call.
-// The function returns a promise of the result.
-client
-  .request("echo", { text: "Hello, World!" })
-  .then((result) => console.log(result));
 
-// Use client.notify to make a JSON-RPC notification call.
-// By definition, JSON-RPC notification does not respond.
-client.notify("log", { message: "Hello, World!" });
 module.export = client;
