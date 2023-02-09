@@ -21,5 +21,13 @@ const client = new JSONRPCClient((jsonRPCRequest) =>
   })
 );
 
+const logout = (req,res) => {
+  client
+  .request("echo", { text: "I am logout!" })
+  .then((result) => res.send(result));
 
-module.export = client;
+  client.notify("log", { message: "Yo whatsapp" }); 
+}
+
+
+module.export = logout;
