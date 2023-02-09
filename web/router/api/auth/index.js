@@ -8,7 +8,7 @@ const router = express.Router();
 router.post('/signup', signup)
 router.get('/users', users);
 router.post('/signin',signin);
-router.post('/logout',(req,res) => {
+router.get('/logout',(req,res) => {
     // Use client.request to make a JSON-RPC request call.
 // The function returns a promise of the result.
     client
