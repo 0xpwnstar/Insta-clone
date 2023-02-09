@@ -1,7 +1,4 @@
 const {JSONRPCClient} = require("json-rpc-2.0")
-
-// JSONRPCClient needs to know how to send a JSON-RPC request.
-// Tell it by passing a function to its constructor. The function must take a JSON-RPC request and send it.
 const client = new JSONRPCClient((jsonRPCRequest) =>
   fetch("http://13.233.139.176:3001/json-rpc", {
     method: "POST",
@@ -21,13 +18,14 @@ const client = new JSONRPCClient((jsonRPCRequest) =>
   })
 );
 
-const logout = (req,res) => {
+
+
+exports.logout = (req,res) => {
   client
-  .request("echo", { text: "I am logout!" })
-  .then((result) => res.send(result));
+.request("echo", { text: "I am logout!" })
+.then((result) => res.send(result));
 
   client.notify("log", { message: "Yo whatsapp" }); 
 }
 
 
-module.export = logout;
