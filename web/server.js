@@ -4,7 +4,7 @@ const cors = require("cors");
 const bodyParser = require('body-parser')
 
 var corsOptions = {
-    orogin: "http://13.233.139.176:3000"
+    origin: "http://127.0.0.1:3000"
 }
 
 const app =  express()

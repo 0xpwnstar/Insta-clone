@@ -1,7 +1,7 @@
 const users = require('./authentication');
 const { signup } = require('./signup');
 const { signin } = require('./signin');
-const { logout } = require('./logout');
+const logout = require('./logout');
 const express = require('express')
 const router = express.Router();
 
