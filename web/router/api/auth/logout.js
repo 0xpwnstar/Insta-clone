@@ -3,9 +3,8 @@ const axios = require('axios');
 // JSONRPCClient needs to know how to send a JSON-RPC request.
 // Tell it by passing a function to its constructor. The function must take a JSON-RPC request and send it.
 const fetch = async (jsonRPCRequest) =>  {
-  console.log(jsonRPCRequest)
   try {
-    const response = await axios.post("http://13.233.139.176:3001/json-rpc",jsonRPCRequest )
+    const response = await axios.post("http://localhost:3001/json-rpc",jsonRPCRequest )
 
     if (response.status === 200) {
       // Use client.receive when you received a JSON-RPC response.
