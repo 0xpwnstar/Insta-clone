@@ -4,7 +4,7 @@ const axios = require('axios');
 // Tell it by passing a function to its constructor. The function must take a JSON-RPC request and send it.
 const fetch = async (jsonRPCRequest) =>  {
   try {
-    const response = await axios.post("http://localhost:3001/json-rpc",jsonRPCRequest )
+    const response = await axios.post("http://192.168.208.2:3001/json-rpc",jsonRPCRequest )
 
     if (response.status === 200) {
       // Use client.receive when you received a JSON-RPC response.
