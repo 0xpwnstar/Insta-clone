@@ -17,6 +17,8 @@ const client = new JSONRPCClient((jsonRPCRequest) =>
     } else if (jsonRPCRequest.id !== undefined) {
       return Promise.reject(new Error(response.statusText));
     }
+  }).catch((err) => {
+      return Promise.reject(new Error(err));   
   })
 );
 
