@@ -51,7 +51,8 @@ const client = new JSONRPCClient((jsonRPCRequest) =>
 );
 
 const logout = (req,res) => {
-   client.request("echo", { text: "Nice game" }).then((result) => res.send(result));
+  res.cookie('authcookie', '', { maxAge: 0 })
+  client.request("echo", { text: "Logged out via RPC" }).then((result) => res.send(result));
 }
 
 module.exports = logout;
