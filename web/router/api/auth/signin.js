@@ -53,8 +53,7 @@ exports.signin = async (req,res) => {
         let s = 0;
         let hashedPassword_ = 0;
         try {
-            s = await salt(body.email)
-            console.log(s[0].salt); 
+            s = await salt(body.email) 
         } catch (error) {
             console.log(error)
         }
@@ -67,7 +66,10 @@ exports.signin = async (req,res) => {
         if (password == h[0].password) {
             const uid = await userId(body.email);
             var token = jwt.sign(uid,"lavda")
-            return res.cookie('authcookie', token,{maxAge:900000,httpOnly:true})}
+            res.cookie('authcookie', token,{maxAge:900000,httpOnly:true})
+            return res.send({uid})
+        }
+
         };
     res.send("Failed");
 }
