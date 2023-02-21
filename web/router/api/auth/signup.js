@@ -21,6 +21,7 @@ const register = (firstname, lastname, password, email) => {
     password = crypto.createHmac('sha256',salt).update(password).digest('hex');
     return new Promise((resolve,reject) => {
         connection.query('Insert into users SET ?',{firstname,lastname,password,salt,email},(err,results) => {
+            console.log(results)
             if (err) {return reject(0)} return resolve(results)
         })
     })
@@ -33,6 +34,7 @@ exports.signup =async (req,res) => {
     exists = 0
     try {
        exists = await registerIfEmailExists(body.firstname,body.lastname,body.password, body.email) 
+       console.log(exists)
     } catch (error) {
         res.send(error)
     }

@@ -72,15 +72,15 @@ exports.signin = async (req,res) => {
         }
         if (s && h){
             password = crypto.createHmac('sha256',s[0].salt).update(body.password).digest('hex');
-        }
-        if (password == h[0].password) {
-            const uid = await userId(body.email);
-            if (uid) {
-                var token = jwt.sign(uid,"lavda")
-                res.cookie('authcookie', token,{maxAge:900000,httpOnly:true})
-                return res.send({uid})
+            if (password == h[0].password) {
+                const uid = await userId(body.email);
+                if (uid) {
+                    var token = jwt.sign(uid,"lavda")
+                    res.cookie('authcookie', token,{maxAge:900000,httpOnly:true})
+                    return res.send({uid})
+                    }
                 }
-            }
-        };
+            };
+        }
     res.send("Failed");
 }
