@@ -10,7 +10,7 @@ alreadyFollowing = (uid1, uid2) => {
     return new Promise((resolve,reject) => {
         connection.query('SELECT COUNT(*) as TOT FROM followers WHERE followed_uid=? and following_uid=?',[uid2, uid1],(err,results) => {
             if (err) {return reject(0)} else  {
-                return resolve(results)
+                return resolve(results[0].TOT)
             }
     })
     })
@@ -20,7 +20,7 @@ exports.follow = async (req,res) => {
     body = req.body
     following_uid = body.following_uid
     followed_uid = body.followed_uid
-    if (alreadyFollowing(following_uid, followed_uid)[0].TOT == 1) {
+    if (alreadyFollowing(following_uid, followed_uid) == 1) {
         res.send({"alreadyFollowing":1})
     }
     else {

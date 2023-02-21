@@ -34,7 +34,7 @@ userExists = (email) => {
     return new Promise((resolve,reject) => {
         connection.query('SELECT COUNT(*) AS TEMAIL FROM users WHERE email=?',[email],(err,results) => {
             if (err) {return reject(0)} else {
-                return resolve(results)
+                return resolve(results[0].TEMAIL)
             }
     })
     })
@@ -51,7 +51,7 @@ userId = (email) => {
 
 exports.signin = async (req,res) => {
     body = req.body
-    if (userExists(body.email)[0].TEMAIL == 1) {
+    if (userExists(body.email) == 1) {
         let s = 0;
         let hashedPassword_ = 0;
         try {
