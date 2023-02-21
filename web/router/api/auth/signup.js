@@ -46,5 +46,8 @@ exports.signup =async (req,res) => {
             res.send(error)
         }
     }
+    else{
+        res.send({"email Exists"})
+    }
 }
 
