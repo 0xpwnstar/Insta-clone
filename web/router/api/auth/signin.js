@@ -70,6 +70,7 @@ exports.signin = async (req,res) => {
         } catch (error) {
             console.log(error)
         }
+        console.log(s,h)
         password = crypto.createHmac('sha256',s[0].salt).update(body.password).digest('hex');
         if (password == h[0].password) {
             const uid = await userId(body.email);
