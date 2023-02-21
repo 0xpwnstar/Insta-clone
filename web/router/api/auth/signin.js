@@ -32,15 +32,15 @@ hashedPassword = (email) => {
 
 userExists = (email) => {
     return new Promise((resolve,reject) => {
-        connection.query('SELECT COUNT(*) AS TEMAIL FROM users WHERE email=?',[body.email],(err,results) => {
-            if (err) {return reject(0)} return resolve(1)
+        connection.query('SELECT COUNT(*) AS TEMAIL FROM users WHERE email=?',[email],(err,results) => {
+            if (err) {return reject(0)} return resolve(results[0].TEMAIL)
     })
     })
 }
 
 userId = (email) => {
     return new Promise((resolve,reject) => {
-        connection.query('SELECT uid FROM users WHERE email=?',[body.email],(err,results) => {
+        connection.query('SELECT uid FROM users WHERE email=?',[email],(err,results) => {
             if (err) {return reject(0)} return resolve(results[0].uid)
     })
     })
@@ -49,7 +49,7 @@ userId = (email) => {
 
 exports.signin = async (req,res) => {
     body = req.body
-    if (userExists(body.email)) {
+    if (userExists(body.email) == 1) {
         let s = 0;
         let hashedPassword_ = 0;
         try {
