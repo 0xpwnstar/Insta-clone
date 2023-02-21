@@ -21,7 +21,7 @@ exports.follow = async (req,res) => {
     following_uid = body.following_uid
     followed_uid = body.followed_uid
     if (followed_uid == following_uid){
-        res.send(400)
+        res.status(400).send()
     }
     let following = 0
     try {
@@ -36,7 +36,7 @@ exports.follow = async (req,res) => {
     else {
         connection.query('Insert into followers SET ?',{following_uid, followed_uid},(err,result) => {
         if (err) console.log("Error in user registeration");
-            res.json(result).send()
+            res.json({result}).send()
         })
     }
 }

@@ -25,10 +25,10 @@ exports.followers = async (req,res) => {
             followers = await totFollowers(uid)
             res.json(followers).send();
         } catch (error) {
-            res.status(404).send(error)
+            res.status(404).send({error})
         }
     }else {
-        res.status(400).json(error).send()
+        res.status(400).send()
     }
     res.status(400).send()
 }

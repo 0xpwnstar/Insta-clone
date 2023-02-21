@@ -5,6 +5,6 @@ const express = require('express')
 const router = express.Router();
 
 router.post('/follow', follow)
-router.get('/following', following)
-router.get('/followers', followers)
+router.post('/following', following)
+router.post('/followers', followers)
 module.exports = router;
