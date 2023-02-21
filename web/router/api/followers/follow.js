@@ -20,6 +20,7 @@ exports.follow = async (req,res) => {
     body = req.body
     following_uid = body.following_uid
     followed_uid = body.followed_uid
+    console.log(alreadyFollowing(following_uid, followed_uid))
     if (alreadyFollowing(following_uid, followed_uid) == 1) {
         res.send({"alreadyFollowing":1})
     }
