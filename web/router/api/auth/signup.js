@@ -6,29 +6,44 @@ const connection = mysql.createConnection({
     password : 'c7508TAN!',
     database : 'insta_clone'
 })
-const registerIfEmailExists = (firstname, lastname, password,  email) => {
-    connection.query('SELECT COUNT(*) AS TEMAIL FROM users WHERE email=?',[email],(err,results) => {
-        if (err) console.log("Error in Email Validation");
-        console.log(results)
-        results[0].TEMAIL == 0 ? register(firstname, lastname, password, email) : false
+
+
+const registerIfEmailExists  = (firstname, lastname, password,  email) => {
+    return new Promise((resolve,reject) => {
+        connection.query('SELECT COUNT(*) AS TEMAIL FROM users WHERE email=?',[email],(err,results) => {
+            if (err) {return reject(0)} return resolve(results[0].TEMAIL)
+        })
     })
 }
 
 const register = (firstname, lastname, password, email) => {
     salt = crypto.randomBytes(12).toString('hex').slice(0,12);
     password = crypto.createHmac('sha256',salt).update(password).digest('hex');
-    console.log("registerting")
-    connection.query('Insert into users SET ?',{firstname,lastname,password,salt,email},(err,results) => {
-        if (err) console.log("Error in user registeration");
-        console.log(results)
+    return new Promise((resolve,reject) => {
+        connection.query('Insert into users SET ?',{firstname,lastname,password,salt,email},(err,results) => {
+            if (err) {return reject(0)} return resolve(results)
+        })
     })
 }
 
 
 
-exports.signup = (req,res) => {
+exports.signup =async (req,res) => {
     body = req.body
-    registerIfEmailExists(body.firstname,body.lastname,body.password, body.email)
-    res.send("Registered")
+    exists = 0
+    try {
+       exists = await registerIfEmailExists(body.firstname,body.lastname,body.password, body.email) 
+    } catch (error) {
+        res.send(error)
+    }
+    if (exists) {
+        registered = 0
+        try {
+            registered = await register(body.firstname,body.lastname,body.password, body.email)
+            res.send({"registered":registered}) 
+        } catch (error) {
+            res.send(error)
+        }
+    }
 }
 

@@ -55,7 +55,7 @@ exports.signin = async (req,res) => {
     try {
         exists = await userExists(body.email)
     } catch (error) {
-        console.log(error)
+        res.send(error)
     }
     if (exists) {
         let s = 0;
@@ -63,22 +63,24 @@ exports.signin = async (req,res) => {
         try {
             s = await salt(body.email) 
         } catch (error) {
-            console.log(error)
+            res.send(error)
         }
         try {
             h = await hashedPassword(body.email) 
         } catch (error) {
-            console.log(error)
+            res.send(error)
         }
-        console.log(s,h)
-        password = crypto.createHmac('sha256',s[0].salt).update(body.password).digest('hex');
+        if (s && h){
+            password = crypto.createHmac('sha256',s[0].salt).update(body.password).digest('hex');
+        }
         if (password == h[0].password) {
             const uid = await userId(body.email);
-            var token = jwt.sign(uid,"lavda")
-            res.cookie('authcookie', token,{maxAge:900000,httpOnly:true})
-            return res.send({uid})
-        }
-
+            if (uid) {
+                var token = jwt.sign(uid,"lavda")
+                res.cookie('authcookie', token,{maxAge:900000,httpOnly:true})
+                return res.send({uid})
+                }
+            }
         };
     res.send("Failed");
 }
