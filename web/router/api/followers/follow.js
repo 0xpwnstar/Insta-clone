@@ -10,6 +10,7 @@ alreadyFollowing = (uid1, uid2) => {
     return new Promise((resolve,reject) => {
         connection.query('SELECT COUNT(*) as TOT FROM followers WHERE followed_uid=? and following_uid=?',[uid2, uid1],(err,results) => {
             if (err) {return reject(0)} else  {
+                conosole.log(results,results[0],results[0].TOT,results[0].TOT[0])
                 return resolve(results[0].TOT)
             }
     })
