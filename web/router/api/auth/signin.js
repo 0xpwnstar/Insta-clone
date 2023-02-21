@@ -33,7 +33,11 @@ hashedPassword = (email) => {
 userExists = (email) => {
     return new Promise((resolve,reject) => {
         connection.query('SELECT COUNT(*) AS TEMAIL FROM users WHERE email=?',[email],(err,results) => {
-            if (err) {return reject(0)} return resolve(results[0].TEMAIL)
+            if (err) {return reject(0)} else {
+                if (results[0].TEMAIL == 1){
+                    return resolve(1)
+                } else return reject(0)
+            }
     })
     })
 }
