@@ -11,7 +11,7 @@ totFollowers = (uid) => {
     return new Promise((resolve,reject) => {
         connection.query('select following_uid from followers Inner Join users on users.uid=following_uid where followed_uid=?',[uid],(err,results) => {
             if (err) {return reject(0)} else  {
-                return resolve(results[0].followed_uid)
+                return resolve(results)
             }
     })
     })
