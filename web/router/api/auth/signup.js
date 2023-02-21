@@ -34,11 +34,10 @@ exports.signup =async (req,res) => {
     exists = 0
     try {
        exists = await registerIfEmailExists(body.firstname,body.lastname,body.password, body.email) 
-       console.log(exists)
     } catch (error) {
         res.send(error)
     }
-    if (exists) {
+    if (!exists) {
         registered = 0
         try {
             registered = await register(body.firstname,body.lastname,body.password, body.email)
