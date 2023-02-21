@@ -23,7 +23,7 @@ const user = async (req,res) => {
         res.status(200).json({elements: ans});
     } catch (error) {
         console.log(error)
-        res.send("err")
+        res.json({error}).send()
     }
 }
 

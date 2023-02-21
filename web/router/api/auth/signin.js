@@ -55,6 +55,7 @@ exports.signin = async (req,res) => {
     try {
         exists = await userExists(body.email)
     } catch (error) {
+        res.status(409)
         res.send(error)
     }
     if (exists) {
@@ -63,11 +64,13 @@ exports.signin = async (req,res) => {
         try {
             s = await salt(body.email) 
         } catch (error) {
+            res.status(409)
             res.send(error)
         }
         try {
             h = await hashedPassword(body.email) 
         } catch (error) {
+            res.status(409)
             res.send(error)
         }
         if (s && h){
@@ -75,12 +78,13 @@ exports.signin = async (req,res) => {
             if (password == h[0].password) {
                 const uid = await userId(body.email);
                 if (uid) {
-                    var token = jwt.sign(uid,"lavda")
-                    res.cookie('authcookie', token,{maxAge:900000,httpOnly:true})
-                    return res.send({uid})
+                    var token = jwt.sign({uid},"lavda",{expiresIn: '7d'})
+                    res.cookie('authcookie', token,{httpOnly:true})
+                    res.json({uid})
+                    return res.send()
                     }
                 }
             };
         }
-    res.send("Failed");
+    res.status(409).send()
 }

@@ -35,19 +35,22 @@ exports.signup =async (req,res) => {
     try {
        exists = await registerIfEmailExists(body.firstname,body.lastname,body.password, body.email) 
     } catch (error) {
+        res.status(409)
         res.send(error)
     }
     if (!exists) {
         registered = 0
         try {
             registered = await register(body.firstname,body.lastname,body.password, body.email)
-            res.send({"registered":registered}) 
+            res.json({"registered":registered}).send() 
         } catch (error) {
+            res.status(409)
             res.send(error)
         }
     }
     else{
-        res.send({"Email exists": body.email})
+        res.status(409)
+        res.json({"Email exists": body.email}).send()
     }
 }
 
