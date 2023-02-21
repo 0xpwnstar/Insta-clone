@@ -20,8 +20,13 @@ exports.follow = async (req,res) => {
     body = req.body
     following_uid = body.following_uid
     followed_uid = body.followed_uid
-    console.log(alreadyFollowing(following_uid, followed_uid))
-    if (alreadyFollowing(following_uid, followed_uid) == 1) {
+    let following = 0
+    try {
+        following = await alreadyFollowing(following_uid, followed_uid)
+    } catch (error) {
+        console.log(error)
+    }
+    if (following) {
         res.send({"alreadyFollowing":1})
     }
     else {

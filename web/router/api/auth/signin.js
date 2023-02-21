@@ -51,7 +51,13 @@ userId = (email) => {
 
 exports.signin = async (req,res) => {
     body = req.body
-    if (userExists(body.email) == 1) {
+    let exists = 0
+    try {
+        exists = await userExists(body.email)
+    } catch (error) {
+        console.log(error)
+    }
+    if (exists) {
         let s = 0;
         let hashedPassword_ = 0;
         try {
