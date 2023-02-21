@@ -47,7 +47,7 @@ exports.signup =async (req,res) => {
         }
     }
     else{
-        res.send({"Email exists": body:email})
+        res.send({"Email exists": body.email})
     }
 }
 
