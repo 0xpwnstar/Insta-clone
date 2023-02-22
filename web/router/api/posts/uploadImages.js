@@ -30,7 +30,6 @@ const uploadImage =  (req, res ) => {
                 await models.upload.create({
                     id,
                     file_name: files.file.name,
-                    user_id: req.user.id,
                 });
                 res.json({"id":id}).send()
             }
