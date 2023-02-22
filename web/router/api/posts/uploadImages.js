@@ -23,9 +23,9 @@ const uploadImage =  (req, res ) => {
             {
                 Bucket: "nodeinstaphotos",
                 Key: id,
-                ContentType: files.file.type,
-                ContentLength: files.file.size,
-                Body: fs.createReadStream(files.file.path),
+                ContentType: files.image.mimetype,
+                ContentLength: files.image.size,
+                Body: fs.createReadStream(files.image.filepath),
             },
             async (data) => {
                 await models.upload.create({
