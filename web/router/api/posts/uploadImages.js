@@ -27,13 +27,14 @@ const uploadImage =  (req, res ) => {
                 ContentLength: files.image.size,
                 Body: fs.createReadStream(files.image.filepath),
             },
-            async (data) => {
-                await models.upload.create({
-                    id,
-                    file_name: files.file.name,
-                });
-                res.json({"id":id}).send()
-            }
+            // async (data) => {
+            //     await models.upload.create({
+            //         id,
+            //         file_name: files.file.name,
+            //     });
+            // }
+            res.json({"id":id}).send()
+
         )
     })
     res.status(400).send()
