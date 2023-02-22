@@ -1,5 +1,6 @@
 const auth = require('./auth');
 const followers = require('./followers');
+const posts = require('./posts');
 const { JSONRPCClient } = require("json-rpc-2.0");
 const axios = require('axios');
 const fetch = async (jsonRPCRequest) =>  {
@@ -24,4 +25,5 @@ const router = express.Router();
 
 router.use('/v1',auth)
 router.use('/v1',followers)
+router.use('/v1',posts)
 module.exports = router;
