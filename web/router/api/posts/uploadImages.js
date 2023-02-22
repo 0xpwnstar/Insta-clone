@@ -33,11 +33,11 @@ const uploadImage =  (req, res ) => {
             //         file_name: files.file.name,
             //     });
             // }
-            () => {res.json({"id":id}).send()
-                return 
+            () => {
+                res.json({"id":id}).send() 
             }
             )
+            return
         })
-    res.status(400).send()
 }
 module.exports = uploadImage;
