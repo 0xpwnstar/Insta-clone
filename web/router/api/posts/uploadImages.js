@@ -33,7 +33,8 @@ const uploadImage =  (req, res ) => {
             //         file_name: files.file.name,
             //     });
             // }
-            res.json({"id":id}).send()
+            {res.json({"id":id}).send()
+            return }
 
         )
     })
