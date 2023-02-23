@@ -16,7 +16,6 @@ const uploadImage =  (req, res ) => {
         if (err) {
             res.status(400).send(err)
         }
-        console.log(files)
   
         const id = uuidv4();
         S3.putObject( 
