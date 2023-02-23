@@ -17,7 +17,7 @@ const uploadImage =  (req, res ) => {
             res.status(400).send(err)
         }
         if (!files || !files.image ) {
-            console.log("here)
+            console.log("here")
             res.status(404).send()
             return 0
         }
