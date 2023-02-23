@@ -14,7 +14,10 @@ exports.createPost = async (req,res, next) => {
     uid = body.uid
     caption = body.caption
     connection.query('Insert into post SET ?',{uid, caption},(err,result) => {
-    if (err) res.send({err});
+    if (err) {
+        res.send({err})
+        return 0    
+    };
     res.json({result})
     next()
     })
