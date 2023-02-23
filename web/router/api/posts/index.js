@@ -1,5 +1,5 @@
 const uploadImage = require('./uploadImages');
-const createPost = require('./post');
+const { createPost } = require('./post');
 const express = require('express')
 const router = express.Router();
 router.use('/post', createPost, uploadImage);
