@@ -16,7 +16,7 @@ const uploadImage =  (req, res ) => {
         if (err) {
             res.status(400).send(err)
         }
-        if (!files || !files.image ) {res.status(404).send() return}
+        if (!files || !files.image ) {res.status(404).send()}
   
         const id = uuidv4();
         S3.putObject( 
